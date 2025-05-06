@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eko Aktivnosti</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e6f5e6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #2e7d32;
+      text-align: center;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    input {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container" id="auth-section">
+  <h2>Dobrodošli</h2>
+  <input type="text" id="username" placeholder="Unesi ime">
+  <button onclick="login()">Uloguj se</button>
+</div>
+
+<div class="container hidden" id="menu-section">
+  <h2>Eko Aktivnosti</h2>
+  <button onclick="addPoints('otpada')">Pokupio/la otpad</button>
+  <button onclick="addPoints('drvo')">Zasadio/la drvo</button>
+  <button onclick="addPoints('reciklirao')">Reciklirao/la</button>
+  <p id="points-display"></p>
+</div>
+
+<script>
+  let user = localStorage.getItem("ekoUser");
+  let points = JSON.parse(localStorage.getItem("ekoPoints")) || 0;
+
+  if (user) {
+    document.getElementById("auth-section").classList.add("hidden");
+    document.getElementById("menu-section").classList.remove("hidden");
+    document.getElementById("points-display").innerText = `Poeni: ${points}`;
+  }
+
+  function login() {
+    const name = document.getElementById("username").value.trim();
+    if (name) {
+      localStorage.setItem("ekoUser", name);
+      localStorage.setItem("ekoPoints", JSON.stringify(0));
+      location.reload();
+    }
+  }
+
+  function addPoints(activity) {
+    points += 1;
+    localStorage.setItem("ekoPoints", JSON.stringify(points));
+    document.getElementById("points-display").innerText = `Poeni: ${points}`;
+    alert(`Dodali ste poen za: ${activity}`);
+  }
+</script>
+</body>
+</html>
