@@ -1,2 +1,2 @@
 # Eko Aktivnosti
-Jednostavna web aplikacija za evidentiranje ekoloških akcija putem QR koda.
+Web aplikacija za ekološke bodove putem QR koda.

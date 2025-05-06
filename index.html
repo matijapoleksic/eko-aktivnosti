@@ -23,6 +23,7 @@
       width: 90%;
       max-width: 400px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
     }
     h2 {
       color: #2e7d32;
@@ -48,12 +49,22 @@
     .hidden {
       display: none;
     }
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 10px;
+      color: #555;
+    }
+    .footer a {
+      color: #2e7d32;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
 <div class="container" id="auth-section">
   <h2>Dobrodošli</h2>
-  <input type="text" id="username" placeholder="Unesi ime" />
+  <input type="text" id="username" placeholder="Unesi ime i prezime" />
   <button onclick="login()">Uloguj se</button>
 </div>
 
@@ -63,6 +74,12 @@
   <button onclick="addPoints('drvo')">Zasadio/la drvo</button>
   <button onclick="addPoints('reciklirao')">Reciklirao/la</button>
   <p id="points-display"></p>
+  <p class="footer">
+    Nastavi sa eko aktivnostima!<br>
+    Vaše ime: <span id="display-name"></span><br>
+    Broj bodova: <span id="display-points"></span><br>
+    Više informacija: <a href="https://www.greenhome.co.me" target="_blank">greenhome.co.me</a>
+  </p>
 </div>
 
 <script>
@@ -73,6 +90,8 @@
     document.getElementById("auth-section").classList.add("hidden");
     document.getElementById("menu-section").classList.remove("hidden");
     document.getElementById("points-display").innerText = `Poeni: ${points}`;
+    document.getElementById("display-name").innerText = user;
+    document.getElementById("display-points").innerText = points;
   }
 
   function login() {
@@ -88,6 +107,7 @@
     points += 1;
     localStorage.setItem("ekoPoints", JSON.stringify(points));
     document.getElementById("points-display").innerText = `Poeni: ${points}`;
+    document.getElementById("display-points").innerText = points;
     alert(`Dodali ste poen za: ${activity}`);
   }
 </script>
